@@ -1,30 +1,31 @@
 package demo.td0spring.BLL.Model;
 
-import java.util.ArrayList;
-import java.util.List;
+import demo.td0spring.BLL.Model.Enumeration.MaritalStatus;
+import lombok.Getter;
+import lombok.Setter;
 
-public class Client extends Person {
-    public float Salary;
-    public char MaritalStatus; // S[ingle] , M[arried] , D[ivorced]
-    public short BirthYear;
-    public short NIP; // 4 digits
-    public List<Account> Accounts;
+import javax.persistence.*;
+import java.util.Collection;
 
-    public Client(int id, String lastName, String firstName, long phone, String email, char gender, Address address, float salary, char maritalStatus, short birthYear, short NIP) {
-        super(id, lastName, firstName, phone, email, gender, address);
-        Salary = salary;
-        MaritalStatus = maritalStatus;
-        BirthYear = birthYear;
-        this.NIP = NIP;
-        this.Accounts = new ArrayList<>();
-    }
+@Getter
+@Setter
 
-    public Client(String lastName, String firstName, long phone, String email, char gender, Address address, float salary, char maritalStatus, short birthYear, short NIP) {
-        super(lastName, firstName, phone, email, gender, address);
-        Salary = salary;
-        MaritalStatus = maritalStatus;
-        BirthYear = birthYear;
-        this.NIP = NIP;
-        this.Accounts = new ArrayList<>();
-    }
+@Entity
+@Table(name = "client")
+public class Client{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long Id;
+
+    private float Salary;
+    @Enumerated(EnumType.STRING)
+    private MaritalStatus MaritalStatus;
+    private short BirthYear;
+    private short NIP; // 4 digits
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private Collection<Account> Accounts;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Person person;
 }

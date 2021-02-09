@@ -16,4 +16,14 @@ public class Address implements Serializable {
     public String City;
     public String PostalCode;
 
+    @Override
+    public String toString() {
+        return "Address{" +
+                "Id=" + Id +
+                ", CivicNB=" + CivicNB +
+                ", Street='" + Street + '\'' +
+                ", City='" + City + '\'' +
+                ", PostalCode='" + PostalCode + '\'' +
+                '}';
+    }
 }

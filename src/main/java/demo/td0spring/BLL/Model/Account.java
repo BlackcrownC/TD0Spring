@@ -1,11 +1,31 @@
 package demo.td0spring.BLL.Model;
 
-public class Account {
-    public char Type; // S[avings] , C[ecking]
-    public float Balance;
+import demo.td0spring.BLL.Model.Enumeration.AccountType;
+import lombok.Getter;
+import lombok.Setter;
 
-    public Account(char type, float balance) {
-        Type = type;
-        Balance = balance;
+import javax.persistence.*;
+import java.io.Serializable;
+
+@Getter
+@Setter
+
+@Entity
+@Table(name = "account")
+public class Account implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long Id;
+
+    private AccountType Type;
+    private float Balance;
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "Id=" + Id +
+                ", Type=" + Type +
+                ", Balance=" + Balance +
+                '}';
     }
 }

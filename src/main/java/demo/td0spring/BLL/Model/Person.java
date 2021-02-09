@@ -1,36 +1,31 @@
 package demo.td0spring.BLL.Model;
 
-public abstract class Person {
-    public int Id;
-    public String LastName;
-    public String FirstName;
-    public long Phone;
-    public String Email;
-    public char Gender; // M[ale] , F[emale] , O[ther]
-    public Address Address;
+import demo.td0spring.BLL.Model.Enumeration.Gender;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.lang.NonNull;
 
-    public Person(int id, String lastName, String firstName, long phone, String email, char gender, Address address) {
-        Id = id;
-        LastName = lastName;
-        FirstName = firstName;
-        Phone = phone;
-        Email = email;
-        Gender = gender;
-        Address = address;
-    }
+import javax.persistence.*;
 
-    public Person(String lastName, String firstName, long phone, String email, char gender, Address address) {
-        Id = getNewId();
-        LastName = lastName;
-        FirstName = firstName;
-        Phone = phone;
-        Email = email;
-        Gender = gender;
-        Address = address;
-    }
+@Getter
+@Setter
 
-    private static int number = 0;
-    public static int getNewId() {
-        return ++number;
-    }
+@Entity
+@Table(name = "person")
+public class Person {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long Id;
+
+    private String LastName;
+    private String FirstName;
+    private Long Phone;
+    private String Email;
+
+    @Enumerated(EnumType.STRING)
+    @NonNull
+    private Gender Gender;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Address Address;
 }
