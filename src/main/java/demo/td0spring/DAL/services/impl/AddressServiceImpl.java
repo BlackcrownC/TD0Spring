@@ -3,10 +3,12 @@ package demo.td0spring.DAL.services.impl;
 import demo.td0spring.BLL.Model.Address;
 import demo.td0spring.DAL.repositories.AddressRepository;
 import demo.td0spring.DAL.services.AddressService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class AddressServiceImpl implements AddressService {
     private final AddressRepository addressRepository;
 

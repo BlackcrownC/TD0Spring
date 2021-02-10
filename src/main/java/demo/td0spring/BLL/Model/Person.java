@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Setter
 
 @Entity
-@Table(name = "person")
+@Table(name = "Person")
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,4 +28,17 @@ public class Person {
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Address Address;
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "Id=" + Id +
+                ", LastName='" + LastName + '\'' +
+                ", FirstName='" + FirstName + '\'' +
+                ", Phone=" + Phone +
+                ", Email='" + Email + '\'' +
+                ", Gender=" + Gender +
+                ", Address=" + Address +
+                '}';
+    }
 }

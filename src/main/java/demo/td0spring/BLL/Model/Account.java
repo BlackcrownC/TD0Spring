@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Setter
 
 @Entity
-@Table(name = "account")
+@Table(name = "Account")
 public class Account implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +19,9 @@ public class Account implements Serializable {
 
     private AccountType Type;
     private float Balance;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Client Client;
 
     @Override
     public String toString() {
